@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
+import uuid from "react-uuid";
 import "@reach/dialog/styles.css";
 
-function TableData() {
+function TableData({ launchDetails }) {
   const [openModal, setOpenModal] = useState(false);
   const [modalDetails, setModalDetails] = useState("");
 
-  const open = () => setOpenModal(true);
   const close = () => setOpenModal(false);
 
-  const handleClick = (details) => {
+  const handleClick = (flight_number) => {
     setOpenModal(true);
-    setModalDetails(details);
+    setModalDetails(flight_number);
   };
 
   return (
@@ -20,19 +20,23 @@ function TableData() {
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
             {openModal ? (
-              <Modal modalDetails={modalDetails} open={open} close={close} />
+              <Modal
+                modalDetails={modalDetails}
+                openModal={openModal}
+                close={close}
+              />
             ) : (
               <table className="min-w-full leading-normal">
                 <thead>
                   <tr>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      User
+                      Mission Name
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Rol
+                      Rocket Name
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                      Created at
+                      Launch Year
                     </th>
                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                       Status
@@ -40,146 +44,66 @@ function TableData() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr onClick={() => handleClick("Details")}>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 w-10 h-10">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            Vera Carpenter
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">Admin</p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        Jan 21, 2020
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">Activo</span>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 w-10 h-10">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            Blake Bowman
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">Editor</p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        Jan 01, 2020
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">Activo</span>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 w-10 h-10">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src="https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            Dana Moore
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">Editor</p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        Jan 10, 2020
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <span className="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">Suspended</span>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-5 py-5 bg-white text-sm">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 w-10 h-10">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src="https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80"
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            Alonzo Cox
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">Admin</p>
-                    </td>
-                    <td className="px-5 py-5 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        Jan 18, 2020
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 bg-white text-sm">
-                      <span className="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 bg-red-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">Inactive</span>
-                      </span>
-                    </td>
-                  </tr>
+                  {launchDetails &&
+                    launchDetails.map((launchDetail) => {
+                      return (
+                        <tr
+                          onClick={() =>
+                            handleClick(launchDetail.flight_number)
+                          }
+                          className="cursor-pointer"
+                          key={uuid()}
+                        >
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <div className="flex items-center">
+                              <div className="flex-shrink-0 w-10 h-10">
+                                <img
+                                  className="w-full h-full rounded-full"
+                                  src={`${launchDetail.links.mission_patch_small}`}
+                                  alt="Coming Soon."
+                                />
+                              </div>
+                              <div className="ml-3">
+                                <p className="text-gray-900 whitespace-no-wrap">
+                                  {launchDetail.mission_name}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {launchDetail.rocket.rocket_name}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {launchDetail.launch_year}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                              <span
+                                aria-hidden
+                                className={
+                                  typeof launchDetail.launch_success == "object"
+                                    ? "absolute inset-0 bg-orange-200 opacity-50 rounded-full"
+                                    : launchDetail.launch_success
+                                    ? "absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                                    : "absolute inset-0 bg-red-200 opacity-50 rounded-full"
+                                }
+                              ></span>
+                              <span className="relative">
+                                {typeof launchDetail.launch_success == "object"
+                                  ? "Upcoming"
+                                  : launchDetail.launch_success
+                                  ? "Success"
+                                  : "Failed"}
+                              </span>
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             )}
