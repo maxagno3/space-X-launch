@@ -13,6 +13,7 @@ function DashBoard() {
   const [launchDetails, setLaunchDetails] = useState("");
   const [searchLaunches, setSearchLaunches] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
   const [endDate, setEndDate] = useState("");
 
   const filterData = () => {
@@ -21,15 +22,17 @@ function DashBoard() {
       .catch((_err) => setLaunchDetails(""));
   };
 
+  console.log(statusFilter, "status filtered");
+
   useEffect(() => {
     filterData();
     // eslint-disable-next-line
   }, [searchLaunches]);
 
   useEffect(() => {
-    dataFilter(startDate, endDate, searchLaunches, setSearchLaunches);
+    dataFilter(startDate, endDate, searchLaunches, setSearchLaunches, statusFilter);
     // eslint-disable-next-line
-  }, [startDate, endDate]);
+  }, [startDate, endDate, statusFilter]);
 
   return (
     <div className="container mx-auto sm:container mt-16">
@@ -43,7 +46,7 @@ function DashBoard() {
           setStartDate={setStartDate}
           setEndDate={setEndDate}
         />
-        <StatusFilter />
+        <StatusFilter setStatusFilter={setStatusFilter} />
       </div>
       <TableData launchDetails={launchDetails} />
     </div>
