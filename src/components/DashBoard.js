@@ -35,7 +35,7 @@ function DashBoard() {
   }, [startDate, endDate, statusFilter]);
 
   return (
-    <div className="container mx-auto sm:container mt-16">
+    <div className="container mx-auto sm:container pt-16">
       <div className="text-center flex justify-center">
         <FilterByUpcomingPast setSearchLaunches={setSearchLaunches} />
       </div>
