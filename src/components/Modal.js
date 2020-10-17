@@ -17,6 +17,7 @@ function Modal({ modalDetails, openModal, close }) {
           <span aria-hidden>x</span>
         </button>
         <div className="flex flex-wrap">
+          <img src={modalDetails.links?.mission_patch_small} alt="loading..." />
           <div className="ml-4">
             <h1 className="font-semibold">Mission Name:</h1>
             <p>{modalDetails?.mission_name}</p>
@@ -25,7 +26,6 @@ function Modal({ modalDetails, openModal, close }) {
             <p>{modalDetails?.launch_site?.site_name_long}</p>
 
             <h1 className="font-semibold">Details:</h1>
-            <p className="break-normal">{modalDetails}</p>
           </div>
         </div>
       </Dialog>
