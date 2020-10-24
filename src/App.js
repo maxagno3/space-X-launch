@@ -1,12 +1,25 @@
 import React from "react";
 import DashBoard from "./components/DashBoard";
 import Header from "./components/Header";
+import BgImage from "./assets/images/spacex-bg-image.webp";
 
 function App() {
   return (
     <div>
       <Header />
-      <DashBoard />
+      <div
+        style={{
+          backgroundImage: `url(${BgImage})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          opacity: 0.95,
+          color: "white",
+        }}
+      >
+        <DashBoard />
+      </div>
     </div>
   );
 }
