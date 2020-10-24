@@ -7,18 +7,42 @@ import { useState } from "react";
 import Axios from "axios";
 import { ROOT_URL } from "../utils/constants";
 import { useEffect } from "react";
-import { dataFilter } from "../utils";
+import { dataFilter, getParamsFromUrl } from "../utils";
 import Loader from "react-loader-spinner";
+import { withRouter } from "react-router-dom";
 
-function DashBoard() {
+function DashBoard(props) {
+  let urlTimeline;
+  let urlStartDate;
+  let urlEndDate;
+  let urlStatusFilter;
+  urlTimeline = props.location.pathname.substring(1) || "";
+  const data = getParamsFromUrl(props.location.search);
+
+  if (data !== undefined) {
+    if (data.length === 3) {
+      urlStartDate = data[0];
+      urlEndDate = data[1];
+      urlStatusFilter = data[2];
+    } else if (data.length === 2) {
+      urlStartDate = data[0];
+      urlEndDate = data[1];
+    } else if (data.length === 1) {
+      urlStatusFilter = data[0];
+    }
+  }
+  // console.log(data, "data arriving!");
+  console.log(urlEndDate, urlStartDate);
+
   const [launchDetails, setLaunchDetails] = useState("");
-  const [searchLaunches, setSearchLaunches] = useState("");
+  // const [searchLaunches, setSearchLaunches] = useState("");
+  const [timeline, setTimeline] = useState(urlTimeline || "");
   const [startDate, setStartDate] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState(urlStatusFilter || "");
   const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const filterData = () => {
+  const filterData = (searchLaunches) => {
     setLoading(true);
     Axios.get(ROOT_URL + `${searchLaunches}`)
       .then(({ data }) => {
@@ -29,25 +53,20 @@ function DashBoard() {
         setLaunchDetails("");
         setLoading(false);
       });
+    // window.history.pushState(null, null, `${searchLaunches}`);
   };
 
-  console.log(statusFilter, "status filtered");
+  // useEffect(() => {
+  //   filterData();
+  //   // eslint-disable-next-line
+  // }, [searchLaunches]);
 
   useEffect(() => {
-    filterData();
+    let term = dataFilter(timeline, startDate, endDate, statusFilter);
+    filterData(term);
+    props.history.push(term);
     // eslint-disable-next-line
-  }, [searchLaunches]);
-
-  useEffect(() => {
-    dataFilter(
-      startDate,
-      endDate,
-      searchLaunches,
-      setSearchLaunches,
-      statusFilter
-    );
-    // eslint-disable-next-line
-  }, [startDate, endDate, statusFilter]);
+  }, [timeline, startDate, endDate, statusFilter]);
 
   if (loading) {
     return (
@@ -60,7 +79,7 @@ function DashBoard() {
   return (
     <div className="container mx-auto sm:container pt-16">
       <div className="text-center flex justify-center">
-        <FilterByUpcomingPast setSearchLaunches={setSearchLaunches} />
+        <FilterByUpcomingPast timeline={timeline} setTimeline={setTimeline} />
       </div>
       <div className="flex justify-between items-center py-4">
         <FilterByDate
@@ -69,11 +88,14 @@ function DashBoard() {
           setStartDate={setStartDate}
           setEndDate={setEndDate}
         />
-        <StatusFilter setStatusFilter={setStatusFilter} />
+        <StatusFilter
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+        />
       </div>
       <TableData launchDetails={launchDetails} />
     </div>
   );
 }
 
-export default DashBoard;
+export default withRouter(DashBoard);
