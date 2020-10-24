@@ -1,10 +1,10 @@
 import React from "react";
 
-function FilterSuccessFail() {
+function StatusFilter() {
   return (
     <div className="flex ml-6 items-center">
       <div className="relative">
-        <select className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10">
+        <select className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10 cursor-pointer">
           <option>All</option>
           <option>Successful Launches</option>
           <option>Failed Launches</option>
@@ -27,4 +27,4 @@ function FilterSuccessFail() {
   );
 }
 
-export default FilterSuccessFail;
+export default StatusFilter;
