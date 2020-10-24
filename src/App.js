@@ -2,6 +2,7 @@ import React from "react";
 import DashBoard from "./components/DashBoard";
 import Header from "./components/Header";
 import BgImage from "./assets/images/spacex-bg-image.webp";
+import { withRouter } from "react-router-dom";
 
 function App() {
   return (
@@ -24,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

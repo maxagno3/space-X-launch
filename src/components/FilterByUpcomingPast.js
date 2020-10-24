@@ -1,12 +1,11 @@
 import React from "react";
 
-function FilterByUpcomingPast({ setSearchLaunches }) {
+function FilterByUpcomingPast({ timeline, setTimeline }) {
   const handleChange = (value) => {
-    if (value === "all") {
-      value = "";
-    }
-    setSearchLaunches(value);
-    console.log(value, "event fired!");
+    // if (value === "all") {
+    //   value = "";
+    // }
+    setTimeline(value);
   };
 
   return (
@@ -14,8 +13,8 @@ function FilterByUpcomingPast({ setSearchLaunches }) {
       <div className="relative w-full">
         <h1>Filter by launches</h1>
         <select
-          className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10"
-          defaultValue="all"
+          className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10 text-black cursor-pointer"
+          value={timeline}
           onChange={(event) => handleChange(event.target.value)}
         >
           <option value="all">All</option>
