@@ -2,7 +2,7 @@ import React from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function FilterByDate() {
+function FilterByDate({ startDate, endDate, setStartDate, setEndDate }) {
   return (
     <>
       <div className="flex flex-row mb-1 sm:mb-0">
@@ -10,29 +10,35 @@ function FilterByDate() {
           <p>Start Date</p>
           <ReactDatePicker
             selectsStart
+            selected={startDate}
             isClearable
             dateFormat="yyyy/MM/dd"
             showYearDropDown
             showMonthDropDown
             closeOnScroll={true}
-            className="cursor-pointer bg-teal-200 text-black p-2"
+            onChange={(data) => setStartDate(data)}
+            className="cursor-pointer bg-white text-black p-2"
+            placeholderText="Start Date"
           />
         </div>
         <div className="relative">
           <p>End Date</p>
           <ReactDatePicker
             selectsEnd
+            selected={endDate}
             isClearable
             minDate={new Date()}
             dateFormat="yyyy/MM/dd"
             showYearDropDown
             showMonthDropDown
             closeOnScroll={true}
-            className="cursor-pointer bg-teal-200 text-black p-2"
+            onChange={(data) => setEndDate(data)}
+            className="cursor-pointer bg-white text-black p-2"
+            placeholderText="End Date"
           />
-          <button className="ml-10 text-white p-2 bg-red-300">
+          {/* <button className="ml-10 text-white p-2 bg-red-300">
             Filter Dates
-          </button>
+          </button> */}
         </div>
       </div>
     </>
