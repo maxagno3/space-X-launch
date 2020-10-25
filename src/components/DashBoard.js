@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { dataFilter, getParamsFromUrl } from "../utils";
 import Loader from "react-loader-spinner";
 import { withRouter } from "react-router-dom";
+import RocketImage from "./RocketImage";
 
 function DashBoard(props) {
   let urlTimeline;
@@ -77,24 +78,27 @@ function DashBoard(props) {
   }
 
   return (
-    <div className="container mx-auto sm:container pt-16">
-      <div className="text-center flex justify-center">
-        <FilterByUpcomingPast timeline={timeline} setTimeline={setTimeline} />
+    <>
+      <RocketImage />
+      <div className="container mx-auto sm:container pt-16">
+        <div className="text-center flex justify-center">
+          <FilterByUpcomingPast timeline={timeline} setTimeline={setTimeline} />
+        </div>
+        <div className="flex justify-between items-center py-4">
+          <FilterByDate
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+          />
+          <StatusFilter
+            statusFilter={statusFilter}
+            setStatusFilter={setStatusFilter}
+          />
+        </div>
+        <TableData launchDetails={launchDetails} />
       </div>
-      <div className="flex justify-between items-center py-4">
-        <FilterByDate
-          startDate={startDate}
-          endDate={endDate}
-          setStartDate={setStartDate}
-          setEndDate={setEndDate}
-        />
-        <StatusFilter
-          statusFilter={statusFilter}
-          setStatusFilter={setStatusFilter}
-        />
-      </div>
-      <TableData launchDetails={launchDetails} />
-    </div>
+    </>
   );
 }
 
